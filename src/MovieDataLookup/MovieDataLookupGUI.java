@@ -5,13 +5,19 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -25,13 +31,15 @@ public class MovieDataLookupGUI extends JFrame implements ActionListener
 	private JTextField apiKeyField = new JTextField(8);
 	private JTextField titleField = new JTextField(24);
 	private JButton searchButton = new JButton("SEARCH");
-	private JTextArea movieDataOutput = new JTextArea("Placeholder Text");
-	private JTextArea placeholder = new JTextArea("Placeholder Image");
+	private JTextArea movieDataOutput = new JTextArea("Enter a title to retrieve movie data.");
+
+	private BufferedImage moviePoster;
+	private JLabel moviePosterOutput = new JLabel();
 	
 	MovieDataLookupGUI()
 	{
 		super("Movie Data Lookup");
-		setSize(700, 700);
+		setSize(625, 675);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		Border margins = BorderFactory.createEmptyBorder(8, 8, 8, 8);
@@ -40,6 +48,7 @@ public class MovieDataLookupGUI extends JFrame implements ActionListener
 		JPanel userPanel = new JPanel();
 		userPanel.setBorder(margins);
 		userPanel.setLayout(new GridLayout(3, 1));
+		setVisible(true);
 		
 		JPanel akpIkeySubpanel = new JPanel();
 		akpIkeySubpanel.setLayout(new FlowLayout());
@@ -67,14 +76,15 @@ public class MovieDataLookupGUI extends JFrame implements ActionListener
 		JPanel resultPanel = new JPanel();
 		resultPanel.setBorder(margins);
 		resultPanel.setLayout(new GridLayout(1, 2, 8, 0));
+		
 		resultPanel.add(movieDataOutput);
 		movieDataOutput.setEditable(false);
 		movieDataOutput.setLineWrap(true);
 		movieDataOutput.setWrapStyleWord(true);
-		resultPanel.add(placeholder);
-		add(resultPanel, BorderLayout.CENTER);
 		
-		setVisible(true);
+		resultPanel.add(moviePosterOutput);
+		moviePosterOutput.setVerticalAlignment(JLabel.NORTH);
+		add(resultPanel, BorderLayout.CENTER);
 	}
 	
 	@Override
@@ -84,10 +94,23 @@ public class MovieDataLookupGUI extends JFrame implements ActionListener
 		{
 			String k = apiKeyField.getText();
 			String t = titleField.getText();
+			
 			try { movieDataOutput.setText(MovieDataLookup.getMovieDataString(k, t)); }
 			catch (IOException e1) {e1.printStackTrace(); }
+			
+			URL posterURL;
+			try
+			{ 
+				posterURL = new URL(MovieDataLookup.getPosterURL());
+				moviePoster = ImageIO.read(posterURL);
+				moviePosterOutput.setIcon(new ImageIcon(moviePoster));
+				
+			} 
+			catch (MalformedURLException e1) { e1.printStackTrace(); }
+			catch (IOException e1) { e1.printStackTrace(); }
+	
 		}
 	}
 }
 
-//c87439fd
+

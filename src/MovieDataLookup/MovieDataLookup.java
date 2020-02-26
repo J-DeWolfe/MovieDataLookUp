@@ -53,35 +53,35 @@ public class MovieDataLookup
 		if (omdbData.get("Title") == null) return "Movie not found";
 		return "" + ((String)omdbData.get("Title")).toUpperCase() + 
 				"\n" +
-				"\nPLOT: " + omdbData.get("Plot") +
+				"\nPlot: " + omdbData.get("Plot") +
 				"\n" +
-				"\nTYPE: " + omdbData.get("Type") +
-				"\nYEAR: " + omdbData.get("Year") +
-				"\nRATED: " + omdbData.get("Rated") +
-				"\nRELEASED: " + omdbData.get("Released") +
-				"\nBoxOffice: " + omdbData.get("BoxOffice") +
-				"\nDVD:: " + omdbData.get("DVD") +
-				"\nRUNTIME: " + omdbData.get("Runtime") +
-				"\nGENRE: " + omdbData.get("Genre") +
-				"\nDIRECTOR: " + omdbData.get("Director") +
-				"\nWRITER: " + omdbData.get("Writer") +
-				"\nACTORS: " + omdbData.get("Actors") +
-				"\nLANGUAGE: " + omdbData.get("Language") +
-				"\nCOUNTRY: " + omdbData.get("Country") +
-				"\nPRODUCTION: " + omdbData.get("Production") +
+				"\nType: " + omdbData.get("Type") +
+				"\nYear: " + omdbData.get("Year") +
+				"\nRated: " + omdbData.get("Rated") +
+				"\nReleased: " + omdbData.get("Released") +
+				"\nBox Office: " + omdbData.get("BoxOffice") +
+				"\nDVD: " + omdbData.get("DVD") +
+				"\nRuntime: " + omdbData.get("Runtime") +
+				"\nGenre: " + omdbData.get("Genre") +
+				"\nDirector: " + omdbData.get("Director") +
+				"\nWriter: " + omdbData.get("Writer") +
+				"\nActors: " + omdbData.get("Actors") +
+				"\nLanguage: " + omdbData.get("Language") +
+				"\nCountry: " + omdbData.get("Country") +
+				"\nProduction: " + omdbData.get("Production") +
 				"\n" +
-				"\nMETASCORE: " + omdbData.get("Metascore") +
-				"\nIMDB RATING: " + omdbData.get("imdbRating") +
-				"\nAWARDS: " + omdbData.get("Awards") +
+				"\nMetascore: " + omdbData.get("Metascore") +
+				"\nIMDB Rating: " + omdbData.get("imdbRating") +
+				"\nAwards: " + omdbData.get("Awards") +
 				"\n" +
-				"\nWEBSITE: " + omdbData.get("Website");
+				"\nWebsite: " + omdbData.get("Website");
 	}
 	
 	public static String getPosterURL() { return (String)omdbData.get("Poster"); }
 	
 	public static void main(String[] args) throws IOException
 	{
-		MovieDataLookupGUI gui = new MovieDataLookupGUI();	
+		MovieDataLookupGUI gui = new MovieDataLookupGUI();
 		
 	}
 }
